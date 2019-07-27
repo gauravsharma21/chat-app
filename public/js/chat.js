@@ -95,5 +95,6 @@ $sendLocationButton.addEventListener('click', () => {
         })
     })
 })
-
-
+window.addEventListener("beforeunload", function(event) {
+    event.returnValue = "Changes you made may not be saved.";
+  });

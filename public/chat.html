@@ -3,7 +3,7 @@
     <head>
         <title>Chat App</title>
         <link rel="icon" href="img/favicon.png">
-        <link rel="stylesheet" href="css/styles.min.css">
+        <link rel="stylesheet" href="css/styles.css">
     </head>
     <body>
         <div class="chat">
@@ -28,7 +28,7 @@
                     <span class="message__name">{{username}}</span>
                     <span class="message__meta">{{createdAt}}</span>
                 </p>
-                <p>{{message}}</p>
+                <div style="overflow-wrap: break-word; width : 500px;">{{message}}</div>
             </div>
         </script>
         <script id="location-template" type="text/html">
