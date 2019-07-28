@@ -10,6 +10,7 @@ const messageTemplate = document.querySelector('#message-template').innerHTML
 const locationTemplate = document.querySelector('#location-template').innerHTML
 const sidebarTemplate = document.querySelector('#sidebar-template').innerHTML
 
+
 const { username, room } = Qs.parse(location.search, {ignoreQueryPrefix : true})
 const autoscroll = () => {
     const element=$messages.lastElementChild
@@ -27,7 +28,8 @@ socket.on('message', (message) => {
     const html = Mustache.render(messageTemplate, {
         username : message.username,
         message : message.text,
-        createdAt : moment(message.createdAt).format('h:mm a')
+        createdAt : moment(message.createdAt).format('h:mm a'),
+        color : message.color
     })
     $messages.insertAdjacentHTML("beforeend", html)
     autoscroll()
@@ -38,7 +40,8 @@ socket.on('locationMessage', (message) => {
     const html = Mustache.render(locationTemplate, {
         username : message.username,
         url : message.text,
-        createdAt : moment(message.createdAt).format('h:mm a')
+        createdAt : moment(message.createdAt).format('h:mm a'),
+        color : message.color
     })
     $messages.insertAdjacentHTML("beforeend", html)
     autoscroll()
@@ -54,7 +57,7 @@ socket.emit('join', {username, room}, (error) => {
 socket.on('roomData', ({ room, users }) => {
     const html = Mustache.render(sidebarTemplate, {
         room,
-        users
+        users,
     })
     document.querySelector('#sidebar').innerHTML = html
 })
@@ -91,4 +94,4 @@ $sendLocationButton.addEventListener('click', () => {
 })
 window.addEventListener("beforeunload", function(event) {
     event.returnValue = "Changes you made may not be saved.";
-  });
+  }); 

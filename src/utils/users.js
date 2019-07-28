@@ -1,8 +1,11 @@
 const users = []
 
+const colors = ['blue', 'green', 'yellow', 'red']
+
 const addUser = ( {id, username, room} ) => {
     username = username.trim().toLowerCase()
     room = room.trim().toLowerCase()
+    const color = colors[parseInt(4 * Math.random())]
 
     if( !username || !room){
         return {
@@ -20,7 +23,7 @@ const addUser = ( {id, username, room} ) => {
         }
     }
 
-    const user = {id, username, room}
+    const user = {id, username, room, color}
 
     users.push(user)
     return { user }
