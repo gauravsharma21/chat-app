@@ -13,7 +13,13 @@ const sidebarTemplate = document.querySelector('#sidebar-template').innerHTML
 const { username, room } = Qs.parse(location.search, {ignoreQueryPrefix : true})
 const autoscroll = () => {
     const element=$messages.lastElementChild
-    element.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"})
+    var rect = element.getBoundingClientRect()
+    var elemTop = rect.top
+    var elemBottom = rect.bottom
+    var isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight)
+    if(isVisible){
+        element.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"})
+    }
 }
 
 socket.on('message', (message) => {
